@@ -214,5 +214,36 @@ class TestRandomSquareCrop(unittest.TestCase):
         self.assertEqual(cropped_image.shape, (10, 10, 3))
 
 
+class TestCropToMultipleOfDimension(unittest.TestCase):
+    def test_crop_result_has_correct_dimensions(self):
+        img = np.zeros((15, 25, 3), dtype=np.uint8)
+        multiple = 4
+        cropped_img = crop.crop_to_multiple_of_dimension(img, multiple)
+
+        # Check the shape of the cropped image
+        self.assertEqual(cropped_img.shape[0] % multiple, 0)
+        self.assertEqual(cropped_img.shape[1] % multiple, 0)
+
+    def test_non_multiple_input_raises(self):
+        img = np.zeros((15, 25, 3), dtype=np.uint8)
+
+        # Assert that ValueError is raised for non-multiple dimension
+        with self.assertRaises(ValueError):
+            crop.crop_to_multiple_of_dimension(img, -1)
+        with self.assertRaises(ValueError):
+            crop.crop_to_multiple_of_dimension(img, 0)
+
+    def test_img_input_validity(self):
+        # Prepare an invalid image (with one dimension being a non-positive integer)
+        invalid_img = np.zeros((0, 10, 3), dtype=np.uint8)
+
+        with self.assertRaises(ValueError):
+            crop.crop_to_multiple_of_dimension(invalid_img, 4)
+
+        invalid_img_2d = np.zeros((10, 10), dtype=np.uint8)
+        with self.assertRaises(ValueError):
+            crop.crop_to_multiple_of_dimension(invalid_img_2d, 4)
+
+
 if __name__ == "__main__":
     unittest.main()

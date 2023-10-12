@@ -144,3 +144,37 @@ def random_square_crop(
     start_x = random.randint(0, max_x)
 
     return crop_square(image, crop_size, start_x, start_y, return_rgb=return_rgb)
+
+
+def crop_to_multiple_of_dimension(img: np.ndarray, multiple: int) -> np.ndarray:
+    """Crop an image to a multiple of a dimension. Useful for models that require
+    input dimensions that are multiples of a certain number, i.e. ViT models.
+
+    Args:
+        img: The image to crop.
+        multiple: The multiple of each dimension to crop to.
+
+    Returns:
+        The cropped image, centered in the original image.
+    """
+    if multiple <= 0:
+        raise ValueError("Multiple must be a positive integer.")
+
+    if len(img.shape) != 3:
+        raise ValueError("Unsupported image type, requires 3D array.")
+
+    height, width, _ = img.shape
+    if height <= 0 or width <= 0:
+        raise ValueError("Image dimensions must be positive integers.")
+
+    # Compute the new dimensions
+    new_width = width - (width % multiple)
+    new_height = height - (height % multiple)
+
+    # Compute coordinates for the new image
+    left = (width - new_width) // 2
+    top = (height - new_height) // 2
+    right = left + new_width
+    bottom = top + new_height
+
+    return img[top:bottom, left:right]
