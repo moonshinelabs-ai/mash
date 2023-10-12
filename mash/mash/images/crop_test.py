@@ -21,7 +21,7 @@ class TestCenterSquareCrop(unittest.TestCase):
         image_np = np.zeros(input_shape)
         cropped_image = crop.center_square_crop(image_np, crop_size, return_rgb=False)
 
-        expected_shape = (crop_size, crop_size)
+        expected_shape: tuple[int, ...] = (crop_size, crop_size)
         if len(input_shape) == 3:
             expected_shape = expected_shape + (input_shape[2],)
 
@@ -78,7 +78,7 @@ class TestCropSquare(unittest.TestCase):
         image_np = np.zeros(input_shape)
         cropped_image = crop.crop_square(image_np, crop_size, start_x, start_y)
 
-        expected_shape = (crop_size, crop_size)
+        expected_shape: tuple[int, ...] = (crop_size, crop_size)
         if len(input_shape) == 3:
             expected_shape = expected_shape + (input_shape[2],)
 
@@ -134,7 +134,7 @@ class TestCropRectangle(unittest.TestCase):
             crop_height=crop_size,
         )
 
-        expected_shape = (crop_size, crop_size)
+        expected_shape: tuple[int, ...] = (crop_size, crop_size)
         if len(input_shape) == 3:
             expected_shape = expected_shape + (input_shape[2],)
 
