@@ -24,6 +24,7 @@ torch = {version = "^2.1.0+cu121", source = "pytorch"}
 pillow-heif = "^0.13.0"
 types-pillow = "^10.0.0.3"
 mypy = "^1.6.0"
+scikit-image = "^0.22.0"
 
 [tool.poetry.group.docs]
 optional = true
