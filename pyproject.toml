@@ -2,13 +2,11 @@
 name = "mash"
 version = "0.1.0"
 description = "Common library tools for Moonshine AI"
-
 license = "MIT"
 
 authors = [
     "Nate Harada <mash@moonshinelabs.ai>"
 ]
-
 repository = ""
 homepage = ""
 
@@ -25,6 +23,7 @@ pillow-heif = "^0.13.0"
 types-pillow = "^10.0.0.3"
 mypy = "^1.6.0"
 scikit-image = "^0.22.0"
+loguru = "^0.7.2"
 
 [tool.poetry.group.docs]
 optional = true
@@ -41,7 +40,6 @@ url = "https://download.pytorch.org/whl/cu121"
 priority = "explicit"
 
 # MyPy is missing stubs, which is annoying
-
 [[tool.mypy.overrides]]
 module = [
     "parameterized",

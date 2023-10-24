@@ -3,3 +3,4 @@ from .crop import (center_square_crop, crop_rectangle, crop_square,
                    crop_to_multiple_of_dimension, random_square_crop)
 from .resize import resize_image_max_side, resize_image_min_side
 from .truecolor import grayscale_to_rgb, transparent_to_rgb
+from .normalization import standardize
