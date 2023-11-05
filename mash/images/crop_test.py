@@ -4,8 +4,9 @@ from itertools import product
 from unittest.mock import patch
 
 import numpy as np
-from mash.images import crop
 from parameterized import parameterized
+
+from mash.images import crop
 
 
 class TestCenterSquareCrop(unittest.TestCase):

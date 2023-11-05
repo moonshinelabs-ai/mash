@@ -1,9 +1,11 @@
-import unittest
 import sys
+import unittest
 from io import StringIO
+
 from loguru import logger
 
 from mash import ui
+
 
 class TestRedirectedStdoutToLoguru(unittest.TestCase):
     def setUp(self):
@@ -27,6 +29,7 @@ class TestRedirectedStdoutToLoguru(unittest.TestCase):
             print(test_message, file=sys.stderr)
         self.assertLogMessage(test_message)
 
+
 class TestMultipleMessages(unittest.TestCase):
     def setUp(self):
         self.held_output = StringIO()
@@ -46,5 +49,6 @@ class TestMultipleMessages(unittest.TestCase):
                 print(msg)
         self.assertLogMessages(messages)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
