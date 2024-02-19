@@ -1,0 +1,17 @@
+name: Lint
+
+on: [push, pull_request]
+
+jobs:
+  lintcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: psf/black@stable
+      - uses: isort/isort-action@v1
+      - name: Install poetry
+        run: pip install poetry --group dev
+      - name: Run mypy
+        run: poetry run mypy mash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
