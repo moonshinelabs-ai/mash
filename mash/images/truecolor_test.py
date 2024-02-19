@@ -1,6 +1,7 @@
 import unittest
 
 import numpy as np
+
 from mash.images import truecolor
 
 

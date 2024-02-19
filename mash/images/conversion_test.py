@@ -3,8 +3,9 @@ import unittest
 
 import numpy as np
 import torch
-from mash.images import conversion
 from PIL import Image
+
+from mash.images import conversion
 
 
 class TestPilFromFile(unittest.TestCase):
@@ -17,7 +18,7 @@ class TestPilFromFile(unittest.TestCase):
         os.remove(self.test_file_path)
 
     def test_path_returns_pil(self):
-        img = conversion.pil_from_file(self.test_file_path)
+        img = conversion.pil_from_uri(self.test_file_path)
         self.assertIsInstance(img, Image.Image)
 
 

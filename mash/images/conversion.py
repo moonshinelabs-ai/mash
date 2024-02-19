@@ -1,6 +1,7 @@
-from typing import Union
+from io import BytesIO
 
 import numpy as np
+import requests
 import torch
 from PIL import Image
 from pillow_heif import register_heif_opener
@@ -18,16 +19,23 @@ def _maybe_convert_to_uint8(image: np.ndarray) -> np.ndarray:
     return image
 
 
-def pil_from_file(path: str) -> Image.Image:
-    """Return a PIL image from an image file.
+def pil_from_uri(uri: str) -> Image.Image:
+    """Return a PIL image from an image file or URL.
 
     Args:
-        path: Path to the image.
+        uri: File path or url to the image.
 
     Returns:
         PIL image.
     """
-    return Image.open(path)
+    if uri.startswith("http://") or uri.startswith("https://"):
+        # The uri is a URL
+        response = requests.get(uri)
+        response.raise_for_status()  # Raise an error for bad responses
+        return Image.open(BytesIO(response.content))
+    else:
+        # The uri is a file path
+        return Image.open(uri)
 
 
 def to_numpy(image: str | np.ndarray | Image.Image | torch.Tensor) -> np.ndarray:
@@ -40,7 +48,7 @@ def to_numpy(image: str | np.ndarray | Image.Image | torch.Tensor) -> np.ndarray
         Numpy array, either uint8 for PIL images or the same type as the input.
     """
     if isinstance(image, str):
-        pil_image = pil_from_file(image)
+        pil_image = pil_from_uri(image)
         return np.array(pil_image)
     elif isinstance(image, np.ndarray):
         return image
@@ -62,7 +70,7 @@ def to_pil(image: str | np.ndarray | Image.Image | torch.Tensor) -> Image.Image:
         PIL image, if the input is not uint8 it will be assumed to be 0-1 and scaled.
     """
     if isinstance(image, str):
-        return pil_from_file(image)
+        return pil_from_uri(image)
     elif isinstance(image, np.ndarray):
         image = _maybe_convert_to_uint8(image)
         return Image.fromarray(image)
@@ -86,7 +94,7 @@ def to_tensor(image: str | np.ndarray | Image.Image | torch.Tensor) -> torch.Ten
         PyTorch Tensor, either uint8 for PIL images or the same type as the input.
     """
     if isinstance(image, str):
-        pil_image = pil_from_file(image)
+        pil_image = pil_from_uri(image)
         np_array = np.array(pil_image)
         return torch.from_numpy(np_array)
     elif isinstance(image, np.ndarray):
