@@ -8,10 +8,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: psf/black@stable
-      - name: Run isort
-        run: poetry run isort --check-only --diff mash --profile black
       - name: Install poetry
         run: pip install poetry --group dev
+      - name: Run isort
+        run: poetry run isort --check-only --diff mash --profile black
       - name: Run mypy
         run: poetry run mypy mash
         env:
