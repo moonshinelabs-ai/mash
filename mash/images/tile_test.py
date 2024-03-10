@@ -12,10 +12,14 @@ class TestImageToTilesComplete(unittest.TestCase):
         self.assertEqual(tiles.shape[0], 100)
         self.assertTrue(np.array_equal(tiles[0], image[:10, :10]))
 
-    def test_not_perfectly_divisible(self):
+    def test_not_perfectly_divisible_with_overlap(self):
         image = np.arange(105 * 105).reshape((105, 105))
-        tiles = image_to_tiles(image, 10, 10)
-        self.assertEqual(tiles.shape[0], 100)
+        tiles = image_to_tiles(image, 10, 10, 5, 5)  # Including overlap
+        # The calculation for the expected number of tiles considering overlap
+        expected_tiles_x = (105 - 5) // (10 - 5)
+        expected_tiles_y = (105 - 5) // (10 - 5)
+        expected_total_tiles = expected_tiles_x * expected_tiles_y
+        self.assertEqual(tiles.shape[0], expected_total_tiles)
 
     def test_large_tile_size(self):
         image = np.arange(30 * 30).reshape((30, 30))
