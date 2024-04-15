@@ -4,7 +4,7 @@ import sys
 from loguru import logger as logging
 
 
-class RedirectedStdout:
+class _RedirectedStdout:
     def write(self, s):
         logging.info(s)
 
@@ -14,11 +14,15 @@ class RedirectedStdout:
 
 @contextlib.contextmanager
 def redirected_stdout_to_loguru():
+    """Convenience context manager to redirect stdout and stderr to loguru logger.
+
+    Useful for capturing output from external libraries that write to stdout or stderr.
+    """
     stdout = sys.stdout
     stderr = sys.stderr
     try:
-        sys.stdout = RedirectedStdout()
-        sys.stderr = RedirectedStdout()
+        sys.stdout = _RedirectedStdout()
+        sys.stderr = _RedirectedStdout()
         yield
     finally:
         sys.stdout = stdout

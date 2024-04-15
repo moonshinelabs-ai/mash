@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-poetry run black .
-poetry run isort . --profile black
-poetry run mypy .
-poetry run pytest .
+poetry run black mash
+poetry run isort mash --profile black
+poetry run mypy mash
+poetry run pytest mash
