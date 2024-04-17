@@ -11,7 +11,6 @@
     <a href="https://moonshine-mash.readthedocs.io/en/latest/">
         <img alt="Documentation" src="https://readthedocs.org/projects/moonshine-mash/badge/?version=latest">
     </a>
-
     <a href="https://pypi.org/project/moonshinelabs-ai/">
         <img alt="PyPi Version" src="https://img.shields.io/pypi/pyversions/mashlib">
     </a>
