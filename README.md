@@ -41,3 +41,20 @@ Mash broadly supports a few utilities, but the main ones are:
 4. Cloud functions: use `glob` or `exists` on AWS or GCS links.
 
 For a complete list of functions, see [the documentation](https://moonshine-mash.readthedocs.io/en/latest/index.html)
+
+## Installation
+To install via pip:
+
+`pip install mashlib`
+
+## Usage
+To use:
+
+```python
+# Import base package
+import mash
+
+# Import image processing
+import mash.images as mi
+image = mi.to_numpy("/path/to/image.png")
+```

@@ -3,7 +3,7 @@ from skimage.transform import resize
 
 
 def _resize_image_fixed_side(
-    image: np.ndarray, side_len: int, method: str = "max", preserve_range: bool = False
+    image: np.ndarray, side_len: int, method: str = "max", preserve_range: bool = True
 ) -> np.ndarray:
     # Do some checking.
     if side_len <= 0:
@@ -35,7 +35,7 @@ def _resize_image_fixed_side(
 
 
 def resize_image_min_side(
-    image: np.ndarray, min_side_len: int = 224, preserve_range: bool = False
+    image: np.ndarray, min_side_len: int = 224, preserve_range: bool = True
 ) -> np.ndarray:
     """Resize the image such that the smallest side is equal to the specified length.
 
@@ -53,14 +53,14 @@ def resize_image_min_side(
 
 
 def resize_image_max_side(
-    image: np.ndarray, max_side_len: int = 224, preserve_range: bool = False
+    image: np.ndarray, max_side_len: int = 224, preserve_range: bool = True
 ) -> np.ndarray:
     """Resize the image such that the longest side is equal to the specified length.
 
     Args:
         image: The image to resize.
         max_side_len: The length of the smallest side.
-        preserve_range: Preserve the range of the image.
+        preserve_range: Preserve the range of the image, False for 0-1.
 
     Returns:
         The resized image.
