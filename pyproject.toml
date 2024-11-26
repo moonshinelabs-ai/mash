@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mashlib"
-version = "0.1.6"
+version = "0.1.7"
 description = "Common library tools for Moonshine AI"
 license = "MIT"
 
@@ -18,7 +18,7 @@ packages = [
 
 # Setup dependencies.
 [tool.poetry.dependencies]
-python = ">=3.10,<3.13"
+python = ">=3.10,<4.0"
 numpy = "^1.26.0"
 pillow = "^10.0.1"
 pillow-heif = "^0.13.0"
