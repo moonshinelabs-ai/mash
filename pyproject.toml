@@ -19,17 +19,17 @@ packages = [
 # Setup dependencies.
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
-numpy = "^1.26.0"
-pillow = "^10.0.1"
-pillow-heif = "^0.13.0"
+numpy = "^1.26.4"
+pillow = "^11.0.0"
 scikit-image = "^0.22.0"
-loguru = "^0.7.2"
+loguru = "^0.7.3"
 torch = ">=2.0.0, !=2.0.1, !=2.1.0"
-requests = "^2.31.0"
-rich = "^13.6.0"
+requests = "^2.32.3"
+rich = "^13.9.4"
 smart-open = "^6.4.0"
-boto3 = "^1.28.78"
-moto = "^4.2.7"
+boto3 = "^1.35.81"
+moto = "^4.2.14"
+pillow-heif = "^0.21.0"
 
 [tool.poetry.group.docs]
 optional = true
